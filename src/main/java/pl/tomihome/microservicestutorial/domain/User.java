@@ -10,12 +10,11 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class Multiplication {
+public class User {
 
-    private  final int factorA;
-    private final int factorB;
+    private final String alias;
 
-    Multiplication() {
-        this(0, 0);
+    protected User() {
+        alias = null;
     }
 }
