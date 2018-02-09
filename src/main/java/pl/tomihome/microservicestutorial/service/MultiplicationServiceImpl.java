@@ -3,6 +3,7 @@ package pl.tomihome.microservicestutorial.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.tomihome.microservicestutorial.domain.Multiplication;
+import pl.tomihome.microservicestutorial.domain.MultiplicationResultAttempt;
 
 @Service
 public class MultiplicationServiceImpl implements MultiplicationService {
@@ -19,5 +20,11 @@ public class MultiplicationServiceImpl implements MultiplicationService {
         int factoryA = randomGeneratorService.generateRandomFactory();
         int factoryB = randomGeneratorService.generateRandomFactory();
         return new Multiplication(factoryA, factoryB);
+    }
+
+    @Override
+    public boolean checkAttempt(final MultiplicationResultAttempt resultAttempt) {
+        return resultAttempt.getResultAttempt() == resultAttempt.getMultiplication().getFactorA() *
+                    resultAttempt.getMultiplication().getFactorB();
     }
 }
