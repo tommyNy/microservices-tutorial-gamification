@@ -1,4 +1,4 @@
-package pl.tomihome.microservicestutorial.service;
+package pl.tomihome.microservicestutorial.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import pl.tomihome.microservicestutorial.controller.MultiplicationController;
 import pl.tomihome.microservicestutorial.domain.Multiplication;
+import pl.tomihome.microservicestutorial.service.MultiplicationService;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,17 +23,17 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(MultiplicationController.class)
+@WebMvcTest(MultiplicationController.class) //ładuje tylko controllery
 @Slf4j
 public class MultiplicationControllerTest {
 
-    @MockBean
+    @MockBean //mock utworzony w given
     private MultiplicationService multiplicationService;
 
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc mockMvc; //utworzony z @WebMvcTest
 
-    private JacksonTester<Multiplication> json;
+    private JacksonTester<Multiplication> json; //dostarcza metody do sprawdzania zawartosci json'ów
 
     @Before
     public void setUp() {
@@ -59,7 +59,7 @@ public class MultiplicationControllerTest {
                 .isEqualTo(
                         json.write(
                                 new Multiplication(70, 20)
-                        ));
+                        ).getJson());
 
 
     }
