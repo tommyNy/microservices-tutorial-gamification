@@ -1,2 +1,2 @@
-# microservices-tutorial
-TDD project
+# microservices-tutorial-gamification
+Service for gamification purpose
